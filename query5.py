@@ -18,10 +18,10 @@ with client:
 		detectors.append(detector)
 	print(length)
 	print(detectors)
+	ct=0
 	for i in detectors:
 		sum1 = 0
 		sum2 =0
-		ct=0
 		for j in i:
 			#data1=db.loopdata.find({'detectorid':i,"starttime" : {"$gte":datetime.fromisoformat('2011-09-22T07:00:00.070+00:00'),"$lt":datetime.fromisoformat('2011-09-22T09:00:00.070+00:00')}})
 			aggregate_data1 = [{ '$match': {'$and': [ { 'detectorid':j }, { "starttime" : {"$gte":datetime.fromisoformat('2011-09-22T07:00:00.070+00:00'),"$lt":datetime.fromisoformat('2011-09-22T09:00:00.070+00:00')}}] }},{ '$group': {'_id': "null", 'Avgspeed': { '$avg': "$speed" } }}]
@@ -49,8 +49,6 @@ with client:
 			timetaken=(length[ct]/totalavgspeed)*60
 		time4to6.append(timetaken)
 		ct+=1
-	print("Total list of times for 7to9 in mins - ",time7to9)
-	print("Total list of times for 4to6 in mins -", time4to6)
 	sum_7to9 =0
 	sum_4to6 = 0
 	for t in range(len(time7to9)):
