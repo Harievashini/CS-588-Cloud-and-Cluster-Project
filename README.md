@@ -1,6 +1,7 @@
 # CS-588-Cloud-and-Cluster-Project
 Used MongoDB to implement these queries. Our data model contains two collections, metadata_station and loopdata. freeway_loopdata_read.py and metadata_station_read.py creates these two collections.
 
+
 Query 1: Count high speeds: Find the number of speeds > 100 in the data set.
 
 Query 2: Volume: Find the total volume for the station Foster NB for Sept 21, 2011.
