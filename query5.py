@@ -23,12 +23,14 @@ with client:
 		sum1 = 0 # sum the average speeds of detectors at 7 to 9 am
 		sum2 = 0 # sum the average speeds of detectors at 4 to 6 pm
 		for j in i:
-			aggregate_data1 = [{ '$match': {'$and': [ { 'detectorid':j }, { "starttime" : {"$gte":datetime.fromisoformat('2011-09-22T07:00:00.070+00:00'),"$lt":datetime.fromisoformat('2011-09-22T09:00:00.070+00:00')}}] }},{ '$group': {'_id': "null", 'Avgspeed': { '$avg': "$speed" } }}]
+			aggregate_data1 = [{ '$match': {'$and': [ { 'detectorid':j }, { "starttime" : {"$gte":datetime.fromisoformat('2011-09-22T07:00:00.070+00:00'),"$lt":datetime.fromisoformat('2011-09-22T09:00:00.070+00:00')}}] }},
+					   { '$group': {'_id': "null", 'Avgspeed': { '$avg': "$speed" } }}]
 			avg_speed1 = list(db.loopdata.aggregate(aggregate_data1)) # Retrieving average speeds in 7 to 9 am time period from loopdata collection
 			if(avg_speed1[0]['Avgspeed']==None):
 				avg_speed1[0]['Avgspeed']=0
 			sum1+=avg_speed1[0]['Avgspeed']
-			aggregate_data2 = [{ '$match': {'$and': [ { 'detectorid':j }, { "starttime" : {"$gte":datetime.fromisoformat('2011-09-22T16:00:00.070+00:00'),"$lt":datetime.fromisoformat('2011-09-22T18:00:00.070+00:00')}}] }},{ '$group': {'_id': "null", 'Avgspeed': { '$avg': "$speed" } }}]
+			aggregate_data2 = [{ '$match': {'$and': [ { 'detectorid':j }, { "starttime" : {"$gte":datetime.fromisoformat('2011-09-22T16:00:00.070+00:00'),"$lt":datetime.fromisoformat('2011-09-22T18:00:00.070+00:00')}}] }},
+					   { '$group': {'_id': "null", 'Avgspeed': { '$avg': "$speed" } }}]
 			avg_speed2 = list(db.loopdata.aggregate(aggregate_data2)) # Retrieving average speeds in 4 to 6 pm time period from loopdata collection 
 			if(avg_speed2[0]['Avgspeed']==None):
 				avg_speed2[0]['Avgspeed']=0
