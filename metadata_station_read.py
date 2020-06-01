@@ -1,8 +1,10 @@
+# Importing pymongo package
 from pymongo import MongoClient
 import csv
 
+# Retrieving the fields from freeway_detectors csv
 def read_detectors(csvfile):
-    detectors={}
+    detectors={} # detectors dictionary/ object to store the subfields
     with open(csvfile, 'r', encoding='utf-8-sig') as file:
         my_reader = csv.reader(file, delimiter=',')
         for row in my_reader:
@@ -16,6 +18,7 @@ def read_detectors(csvfile):
             detectors[stationid].append(detectordocument)
     return detectors
 
+# Retrieving the fields from metadata_station csv
 def read_stations(csvfile):
     stations=[]
     with open(csvfile, 'r',encoding='utf-8-sig') as file:
@@ -38,17 +41,17 @@ def read_stations(csvfile):
             stations.append(station_document)
     return stations
 
-    
+# Passing MongoClient a host name and a port number.   
 client = MongoClient("mongodb://127.0.0.1:27017")
-db=client.project
-stations = read_stations('metadata_station.csv')
-detectors = read_detectors('freeway_detectors.csv')
+db=client.project # Opening Database project
+stations = read_stations('metadata_station.csv') # Fetch documents from metadata_station csv
+detectors = read_detectors('freeway_detectors.csv') # Fetch documents from freeway_detectors csv
 for station in stations: 
-    stationid = station['stationid']
+    stationid = station['stationid'] 
     if stationid in detectors:
         station['detectors'] = detectors[stationid]    
     else:
         station['detectors'] = []
-    result = db.metadata_station.insert_one(station)
+    result = db.metadata_station.insert_one(station) # Add the documents to metadata_station collection
 
 
