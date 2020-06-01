@@ -1,7 +1,9 @@
+# Importing pymongo package and datetime package
 from pymongo import MongoClient
 from datetime import datetime
 import csv
 
+# Retrieving the fields from freeway_loopdata csv
 def read_loopdata(db,csvfile):
 	with open(csvfile, 'r') as file:
 		my_reader = csv.reader(file, delimiter=',')
@@ -30,9 +32,11 @@ def read_loopdata(db,csvfile):
 				dqflags = int(row[6])
 
 			document = {'detectorid':detectorid,'starttime': starttime,'volume':volume,'speed':speed,'occupancy':occupancy,'status':status,'dqflags':dqflags}
-			result = db.loopdata.insert_one(document)
-	
+			result = db.loopdata.insert_one(document) # Add the documents to loopdata collection
+
+# Passing MongoClient a host name and a port number.	
 client = MongoClient("mongodb://127.0.0.1:27017")
-db=client.project
-read_loopdata(db,'freeway_loopdata.csv')
+db=client.project # Opening Database project
+read_loopdata(db,'freeway_loopdata.csv') # Function to fetch documents from freeway_loopdata csv
+
 
