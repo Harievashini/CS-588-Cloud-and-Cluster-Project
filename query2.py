@@ -15,7 +15,8 @@ with client:
 		for i in r:
 			detector.append(i['detectorid'])
 	for i in detector:
-		aggregate_data = [{ '$match': {'$and': [ { 'detectorid':i }, { "starttime" : {"$gte":datetime.fromisoformat('2011-09-21T00:00:00.070+00:00'),"$lt":datetime.fromisoformat('2011-09-22T00:00:00.070+00:00')}}] }},{ '$group': {'_id': "null", 'sumofvolume': { '$sum': "$volume" } }}]
+		aggregate_data = [{ '$match': {'$and': [ { 'detectorid':i }, { "starttime" : {"$gte":datetime.fromisoformat('2011-09-21T00:00:00.070+00:00'),"$lt":datetime.fromisoformat('2011-09-22T00:00:00.070+00:00')}}] }},
+				  { '$group': {'_id': "null", 'sumofvolume': { '$sum': "$volume" } }}]
 		vol = list(db.loopdata.aggregate(aggregate_data)) #volume count of the documents from loopdata collection
 		volume_count.append(vol)
 	for i in volume_count:
