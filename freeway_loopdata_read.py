@@ -31,7 +31,8 @@ def read_loopdata(db,csvfile):
 			else:
 				dqflags = int(row[6])
 
-			document = {'detectorid':detectorid,'starttime': starttime,'volume':volume,'speed':speed,'occupancy':occupancy,'status':status,'dqflags':dqflags}
+			document = {'detectorid':detectorid,'starttime': starttime,'volume':volume,'speed':speed,
+				    'occupancy':occupancy,'status':status,'dqflags':dqflags}
 			result = db.loopdata.insert_one(document) # Add the documents to loopdata collection
 
 # Passing MongoClient a host name and a port number.	
