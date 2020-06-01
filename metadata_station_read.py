@@ -36,8 +36,10 @@ def read_stations(csvfile):
             highway_direction = row[9]
             highway_name = row[10]
 
-            station_document = {'stationid':stationid,'milepost':milepost,'locationtext':locationtext,'upstream':upstream,'downstream':downstream,'numberlanes':numberlanes,
-                'latlon':latlon,'length':length,'highway_shortdirection':highway_shortdirection,'highway_direction':highway_direction,'highway_name':highway_name}
+            station_document = {'stationid':stationid,'milepost':milepost,'locationtext':locationtext,'upstream':upstream,
+                                'downstream':downstream,'numberlanes':numberlanes,'latlon':latlon,'length':length,
+                                'highway_shortdirection':highway_shortdirection,'highway_direction':highway_direction,
+                                'highway_name':highway_name}
             stations.append(station_document)
     return stations
 
