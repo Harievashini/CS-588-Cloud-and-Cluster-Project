@@ -1,5 +1,5 @@
 # CS-588-Cloud-and-Cluster-Project
-Used MongoDB to implement these queries. Our data model contains two collections, metadata_station and loopdata. freeway_loopdata_read.py and metadata_station_read.py creates these two collections.
+Used MongoDB to implement these queries. We have used Freeway dataset to work on the NoSQL database.Our data model contains two collections, metadata_station and loopdata. freeway_loopdata_read.py and metadata_station_read.py creates these two collections.
 
 
 
